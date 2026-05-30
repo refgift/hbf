@@ -1,0 +1,8 @@
+[Unit]
+Description=HBF
+
+[Service]
+ExecStart=/usr/local/bin/hbf -q
+
+[Install]
+WantedBy=multi-user.target
