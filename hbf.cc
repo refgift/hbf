@@ -7,10 +7,8 @@
 #include <sys/resource.h>
 #include <cstring>
 
-#define POWERABUSER 175
-#define SMALL 72
-#define ABUSER 101
 #define HOLDBACKER 119
+#define LIBERTY 104
 
 using namespace std;
 using namespace std::chrono;
@@ -27,7 +25,7 @@ void apply() {
         static int F [[maybe_unused]];
 	F=0;
 	this_thread::sleep_for(milliseconds(110));
-	F=SMALL;
+	F=LIBERTY;
 	this_thread::sleep_for(milliseconds(110));
 	F=0;
 	this_thread::sleep_for(milliseconds(110));
