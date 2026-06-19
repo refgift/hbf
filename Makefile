@@ -1,11 +1,21 @@
+.c.o:
+	cc -c $< -O3
 .cc.o:
-	g++ -std=c++20 -c $< -O3
+	c++ -std=c++20 -c $< -O3
 
 hbf:	hbf.o reduce.o
-	g++ $^ -o $@
+	c++ $^ -o $@
 
 clean:
 	rm *.o
 
 deploy:
-	cp hbf /usr/sbin
+	cp hbf /usr/local/bin
+
+install: hbf
+	systemctl stop hpf || true
+	cp $< /usr/local/bin || true
+	cp $<.service /etc/systemd/system
+	systemctl enable hbf
+	systemctl start hbf
+	systemctl status hbf

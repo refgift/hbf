@@ -1,5 +1,5 @@
 /* hbf - (C) Copyright 2026 Larry B. Daniel Atlanta, Ga. */
-// Abuse of Power Fighter
+// Hold Back Dominator Pattern Fighter
 
 #include <thread>
 #include <chrono>
@@ -15,12 +15,11 @@
 using namespace std;
 using namespace std::chrono;
 
-
-extern int reduce(int);
+extern "C" int reduce(int);
 
 int rnd() {
     static long rndresult=0;
-    asm ("1:  rdrand %0; jnc 1b":"=r" (rndresult));
+    asm ("1: pause;  rdrand %0; jnc 1b":"=r" (rndresult));
     return rndresult;
 }
 
@@ -36,9 +35,10 @@ void apply() {
 
 int main(int argc, char** argv) {
 
-        static int A,B,C,D,E=0;
-	static bool quiet = false;
+        static int A,B,C;
+	static bool quiet;
 
+	quiet=false;
 	for (int i = 1; i < argc; ++i) if (!strcmp(argv[i], "-q")) quiet = true;
 
 	cerr << "hbf" <<endl;
@@ -62,8 +62,6 @@ int main(int argc, char** argv) {
 			A=0;
 			B=0;
 			C=0;
-			D=0;
-			E=0;
 		}
 	}
 	return 0;
